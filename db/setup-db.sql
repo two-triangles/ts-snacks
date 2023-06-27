@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS ts-snacks;
+CREATE DATABASE ts-snacks;
