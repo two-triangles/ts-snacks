@@ -14,18 +14,14 @@ model Snack {
   snack_id          Int                     @id @default(autoincrement())
   snack_name        String
   flavour_text      String
-  snackCategory     SnackCategory           @relation(fields: [snack_id], references: [snack_id])
+  category_id       Int   
+  price             Int              
+  category          Category                @relation(fields: [category_id], references: [category_id])
 }
 
 model Category {
   category_id       Int                     @id @default(autoincrement())
   category_name     String
-  snackCategory     SnackCategory           @relation(fields: [category_id], references: [category_id])
+  snacks            Snack[]         
 }
 
-model SnackCategory {
-  snack_id          Int                     @unique
-  category_id       Int                     @unique
-  snacks            Snack[]    
-  categories        Category[]                 
-}
