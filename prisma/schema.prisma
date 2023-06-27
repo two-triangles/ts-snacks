@@ -11,21 +11,21 @@ datasource db {
 }
 
 model Snack {
-  snack_id          String                  @id @default(cuid())
+  snack_id          Int                     @id @default(autoincrement())
   snack_name        String
   flavour_text      String
   snackCategory     SnackCategory           @relation(fields: [snack_id], references: [snack_id])
 }
 
 model Category {
-  category_id       String                  @id @default(cuid())
+  category_id       Int                     @id @default(autoincrement())
   category_name     String
   snackCategory     SnackCategory           @relation(fields: [category_id], references: [category_id])
 }
 
 model SnackCategory {
-  snack_id          String                  @unique
-  category_id       String                  @unique
+  snack_id          Int                     @unique
+  category_id       Int                     @unique
   snacks            Snack[]    
   categories        Category[]                 
 }
