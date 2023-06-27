@@ -9,3 +9,23 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Snack {
+  snack_id          String                  @id @default(cuid())
+  snack_name        String
+  flavour_text      String
+  snackCategory     SnackCategory           @relation(fields: [snack_id], references: [snack_id])
+}
+
+model Category {
+  category_id       String                  @id @default(cuid())
+  category_name     String
+  snackCategory     SnackCategory           @relation(fields: [category_id], references: [category_id])
+}
+
+model SnackCategory {
+  snack_id          String                  @unique
+  category_id       String                  @unique
+  snacks            Snack[]    
+  categories        Category[]                 
+}
