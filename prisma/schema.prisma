@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Snack {
-  snack_id          Int                     @id @default(autoincrement())
+  snack_id          String                   @id @default(cuid())
   snack_name        String
   flavour_text      String
   category_id       Int   
@@ -20,7 +20,7 @@ model Snack {
 }
 
 model Category {
-  category_id       Int                     @id @default(autoincrement())
+  category_id       Int                     @id 
   category_name     String
   snacks            Snack[]         
 }
