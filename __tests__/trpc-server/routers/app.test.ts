@@ -7,3 +7,11 @@ describe('app.hello', () => {
     expect(greeting).toEqual({ greeting: 'hello bob' });
   });
 });
+
+describe('snacksRouter.list', () => {
+  test('returns an array', async () => {
+    const caller = appRouter.createCaller({});
+    const list = await caller.snacks.list({})
+    expect(Array.isArray(list)).toBeTruthy()
+  });
+});

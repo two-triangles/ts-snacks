@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { procedure, router } from '../trpc';
 
+import { SnacksRouter, snacksRouter } from './snacks_router';
+
 export const appRouter = router({
   hello: procedure
     .input(
@@ -14,6 +16,7 @@ export const appRouter = router({
         greeting: `hello ${opts.input.name}`,
       };
     }),
+    snacks: snacksRouter
 });
 
 // export type definition of API

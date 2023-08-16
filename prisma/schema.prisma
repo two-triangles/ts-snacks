@@ -11,17 +11,39 @@ datasource db {
 }
 
 model Snack {
-  snack_id          String                   @id @default(cuid())
-  snack_name        String
-  flavour_text      String
-  category_id       Int   
-  price             Int              
-  category          Category                @relation(fields: [category_id], references: [category_id])
+  snack_id        String   @id @default(cuid())
+  snack_name      String
+  flavour_text    String
+  category_id     Int
+  price           Int
+  category        Category @relation(fields: [category_id], references: [category_id])
+  stock           Stock[]
+  created_at      DateTime
+  last_updated_at DateTime
 }
 
 model Category {
-  category_id       Int                     @id 
-  category_name     String
-  snacks            Snack[]         
+  category_id     Int      @id
+  category_name   String
+  snacks          Snack[]
+  created_at      DateTime
+  last_updated_at DateTime
 }
 
+model VendingMachine {
+  machine_id      String   @id @default(cuid())
+  location        String
+  stock           Stock[]
+  created_at      DateTime
+  last_updated_at DateTime
+}
+
+model Stock {
+  stock_id        String         @id @default(cuid())
+  vending_machine VendingMachine @relation(fields: [machine_id], references: [machine_id])
+  machine_id      String
+  snack           Snack          @relation(fields: [snack_id], references: [snack_id])
+  snack_id        String
+  created_at      DateTime
+  last_updated_at DateTime
+}
