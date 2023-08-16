@@ -18,24 +18,24 @@ model Snack {
   price           Int
   category        Category @relation(fields: [category_id], references: [category_id])
   stock           Stock[]
-  created_at      DateTime
-  last_updated_at DateTime
+  created_at      DateTime @default(now())
+  last_updated_at DateTime @default(now())
 }
 
 model Category {
   category_id     Int      @id
   category_name   String
   snacks          Snack[]
-  created_at      DateTime
-  last_updated_at DateTime
+  created_at      DateTime @default(now())
+  last_updated_at DateTime @default(now())
 }
 
 model VendingMachine {
   machine_id      String   @id @default(cuid())
   location        String
   stock           Stock[]
-  created_at      DateTime
-  last_updated_at DateTime
+  created_at      DateTime @default(now())
+  last_updated_at DateTime @default(now())
 }
 
 model Stock {
@@ -44,6 +44,8 @@ model Stock {
   machine_id      String
   snack           Snack          @relation(fields: [snack_id], references: [snack_id])
   snack_id        String
-  created_at      DateTime
-  last_updated_at DateTime
+  created_at      DateTime       @default(now())
+  last_updated_at DateTime       @default(now())
 }
+
+// [] or @relation are not columns in the table
